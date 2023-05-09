@@ -17,7 +17,7 @@ class Loop {
 
     public stop() {
         this._isRunning = false;
-        window.cancelAnimationFrame(this._requestID);
+        if (this._requestID) window.cancelAnimationFrame(this._requestID);
     }
 
     private _tick(timestamp: number) {
