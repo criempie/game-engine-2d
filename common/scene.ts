@@ -15,10 +15,7 @@ class Scene implements IUpdateable, IRenderable {
         });
     }
 
-    public render(ctx: CanvasRenderingContext2D, size: Vector) {
-        ctx.fillStyle = 'gray';
-        ctx.fillRect(0, 0, size.x, size.y);
-    }
+    public render(ctx: CanvasRenderingContext2D, size: Vector) {}
 
 }
 
