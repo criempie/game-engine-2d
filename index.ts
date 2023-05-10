@@ -1,1 +1,1 @@
-export * from './common/vector';
+export {}
