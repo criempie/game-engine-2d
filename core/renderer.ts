@@ -23,7 +23,25 @@ class CanvasRenderer {
     }
 
     public render() {
-        this._buffer.forEach((e) => e.render(this._ctx));
+        this._buffer.forEach((e) => {
+            this._drawWrapper(e.render)(this._ctx);
+        });
+    }
+
+    private _drawWrapper<T extends Array<unknown>, R>(func: (...args: T) => R) {
+        return (...args: T): R => {
+            const savedStrokeColor = this._ctx.strokeStyle;
+            const savedFillColor = this._ctx.fillStyle;
+
+            this._ctx.beginPath();
+            const result = func.apply(this, args);
+            this._ctx.closePath();
+
+            this._ctx.strokeStyle = savedStrokeColor;
+            this._ctx.fillStyle = savedFillColor;
+
+            return result;
+        };
     }
 
     private _createCanvas(width: number, height: number) {

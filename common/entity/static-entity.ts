@@ -8,6 +8,8 @@ abstract class StaticEntity implements IRenderable {
     constructor(position: Vector, size: Vector) {
         this.position = position.clone();
         this.size = size;
+
+        this.render = this.render.bind(this);
     }
 
     abstract render(ctx: CanvasRenderingContext2D): void;

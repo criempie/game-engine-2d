@@ -1,7 +1,7 @@
 import { Entity, StaticEntity } from './entity';
 import { IRenderable, IUpdateable } from './types';
 
-class Scene implements IUpdateable, IRenderable {
+class Scene implements IUpdateable {
     public entities: Array<StaticEntity | Entity> = [];
 
     constructor() {}
@@ -12,10 +12,6 @@ class Scene implements IUpdateable, IRenderable {
                 e.update();
             }
         });
-    }
-
-    public render(ctx: CanvasRenderingContext2D) {
-        this.entities.forEach((e) => e.render(ctx));
     }
 
 }
