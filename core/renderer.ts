@@ -12,6 +12,10 @@ class CanvasRenderer {
 
         if (!ctx) throw new Error('context from canvas is null');
         this._ctx = ctx;
+
+        rootElement.appendChild(this._canvasElement);
+
+        this.render = this.render.bind(this);
     }
 
     public addToRenderBuffer(e: IRenderable) {

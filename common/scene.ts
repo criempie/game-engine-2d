@@ -19,3 +19,5 @@ class Scene implements IUpdateable, IRenderable {
     }
 
 }
+
+export { Scene };

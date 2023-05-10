@@ -5,3 +5,11 @@ export interface IUpdateable {
 export interface IRenderable {
     render(ctx: CanvasRenderingContext2D): void;
 }
+
+export interface EngineConfig {
+    ups: number;
+    canvas: {
+        width: number;
+        height: number;
+    }
+}
