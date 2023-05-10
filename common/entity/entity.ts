@@ -3,11 +3,11 @@ import { Vector } from '../vector';
 import { StaticEntity } from './static-entity';
 
 abstract class Entity extends StaticEntity implements IUpdateable {
-    constructor(position: Vector) {
-        super(position);
+    constructor(position: Vector, size: Vector) {
+        super(position, size);
     }
 
-    public update() {}
+    abstract update(): void;
 }
 
 export { Entity };
