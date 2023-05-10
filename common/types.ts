@@ -13,3 +13,7 @@ export interface EngineConfig {
         height: number;
     }
 }
+
+export interface GameConfig {
+    engine: EngineConfig;
+}
