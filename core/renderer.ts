@@ -1,8 +1,10 @@
+import { Vector } from '../common/vector';
 import { IRenderable } from '../common/types';
 
 class CanvasRenderer {
     private readonly _canvasElement: HTMLCanvasElement;
     private readonly _ctx: CanvasRenderingContext2D;
+    private readonly _size: Vector;
 
     private _buffer: IRenderable[] = [];
 
@@ -16,6 +18,7 @@ class CanvasRenderer {
         rootElement.appendChild(this._canvasElement);
 
         this.render = this.render.bind(this);
+        this._size = Vector.create(width, height);
     }
 
     public addToRenderBuffer(e: IRenderable) {
@@ -23,8 +26,10 @@ class CanvasRenderer {
     }
 
     public render() {
+        this._ctx.clearRect(0, 0, this._size.x, this._size.y);
+
         this._buffer.forEach((e) => {
-            this._drawWrapper(e.render)(this._ctx);
+            this._drawWrapper(e.render)(this._ctx, this._size);
         });
     }
 

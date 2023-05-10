@@ -21,6 +21,8 @@ class Engine {
     public setScene(scene: Scene) {
         this._scene = scene;
 
+        this._renderer.addToRenderBuffer(scene);
+
         scene.entities.forEach((e) => {
             this._renderer.addToRenderBuffer(e);
         })
