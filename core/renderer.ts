@@ -55,6 +55,7 @@ class CanvasRenderer {
         canvasElement.width = width;
         canvasElement.height = height;
         canvasElement.className = 'game__canvas';
+        canvasElement.tabIndex = 0;
 
         return canvasElement;
     }
