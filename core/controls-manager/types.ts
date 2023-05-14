@@ -5,7 +5,7 @@ export enum KeyboardKeyCode {
 export type KeyboardEventType = 'keyup' | 'keydown';
 
 export interface KeyboardControl {
-    type: KeyboardEventType,
     key: KeyboardKeyCode,
     callback: Function,
+    callbackWhenReverse?: Function,
 }
