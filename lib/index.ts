@@ -1,1 +1,1 @@
-export * from './deleteElementsFromArray';
+export * from './deleteElementFromArray';
