@@ -1,3 +1,4 @@
+import { Entity, StaticEntity } from '../common/entity';
 import { Scene } from '../common/scene';
 import { EngineConfig } from '../common/types';
 import { Loop } from './loop';
@@ -6,8 +7,7 @@ import { CanvasRenderer } from './renderer';
 class Engine {
     private _loop: Loop;
     private _renderer: CanvasRenderer;
-
-    private _scene?: Scene;
+    private _entities: Array<Entity | StaticEntity> = [];
 
     constructor(rootElement: HTMLElement, config: EngineConfig) {
         this._renderer = new CanvasRenderer(rootElement, config.canvas.width, config.canvas.height);
@@ -18,20 +18,19 @@ class Engine {
         this._loop.start();
     }
 
-    public setScene(scene: Scene) {
-        this._scene = scene;
-
-        this._renderer.addToRenderBuffer(scene);
+    public loadScene(scene: Scene) {
+        this._renderer.addToBuffer(scene);
 
         scene.entities.forEach((e) => {
-            this._renderer.addToRenderBuffer(e);
-        })
+            this._entities.push(e);
+            this._renderer.addToBuffer(e);
+        });
     }
 
     private _update() {
-        if (this._scene) {
-            this._scene.update();
-        }
+        this._entities.forEach((e) => {
+            if (e instanceof Entity) e.update();
+        });
     }
 }
 

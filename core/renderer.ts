@@ -21,7 +21,7 @@ class CanvasRenderer {
         this._size = Vector.create(width, height);
     }
 
-    public addToRenderBuffer(e: IRenderable) {
+    public addToBuffer(e: IRenderable) {
         this._buffer.push(e);
     }
 
