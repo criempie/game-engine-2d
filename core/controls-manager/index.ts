@@ -1,2 +1,3 @@
 export * from './manager';
-export type { ControlsManagerSubscription, KeyboardKeyCode } from './types';
+export type * from './types';
+export { KeyboardKeyCode } from './types';

@@ -1,13 +1,11 @@
-import { IdManager } from '../../common/idManager';
-import { deleteElementsFromArray } from '../../lib';
-import { ControlsManagerSubscription, EventType, KeyboardKeyCode } from './types';
+import { SubscriptionManager } from '../../common/subscription-manager';
+import { KeyboardControl } from './types';
 
 class ControlsManager {
-    private _subscribers: ControlsManagerSubscription[] = [];
-    private _idManager: IdManager;
+    private _subscriptionManager: SubscriptionManager<KeyboardControl>;
 
     constructor(private _elementToListen: HTMLElement) {
-        this._idManager = new IdManager();
+        this._subscriptionManager = new SubscriptionManager();
     }
 
     public startObserve() {
@@ -20,25 +18,8 @@ class ControlsManager {
         this._elementToListen.removeEventListener('keyup', this._keyListener.bind(this));
     }
 
-    public subscribe(event: EventType, key: KeyboardKeyCode, callback: Function) {
-        const id = this._idManager.next();
-
-        this._subscribers.push({
-            id,
-            type: event,
-            key,
-            callback
-        });
-
-        return () => this._unsubscribeFn(id);
-    }
-
-    private _unsubscribeFn(id: string) {
-        deleteElementsFromArray(((s) => s.id === id), this._subscribers);
-    }
-
     private _keyListener(event: KeyboardEvent) {
-        this._subscribers.forEach((s) => {
+        this._subscriptionManager.subscriptions.forEach((s) => {
             if (s.type === event.type && s.key === event.code) {
                 s.callback();
             }

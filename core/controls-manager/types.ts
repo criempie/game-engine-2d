@@ -2,11 +2,10 @@ export enum KeyboardKeyCode {
     W = 'KeyW', D = 'KeyD', S = 'KeyS', A = 'KeyA'
 }
 
-export type EventType = 'keyup' | 'keydown';
+export type KeyboardEventType = 'keyup' | 'keydown';
 
-export interface ControlsManagerSubscription {
-    id: string;
-    type: EventType,
+export interface KeyboardControl {
+    type: KeyboardEventType,
     key: KeyboardKeyCode,
     callback: Function,
 }
